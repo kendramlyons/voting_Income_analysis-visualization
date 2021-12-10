@@ -1,0 +1,101 @@
+"","income","reason","percent"
+"1","<10K","Out of town",6.5
+"2","<10K","Forgot to vote",5.2
+"3","<10K","Concerns about COVID-19",2.9
+"4","<10K","Illness or disability",15.9
+"5","<10K","Not interested",9.9
+"6","<10K","Too busy, conflicting schedule",12.6
+"7","<10K","Transportation problems",6.2
+"8","<10K","Didn't like candidates or issues",8.6
+"9","<10K","Registration problems",2.8
+"10","<10K","Inconvenient polling place",6.6
+"11","10-15K","Out of town",0.8
+"12","10-15K","Forgot to vote",2.2
+"13","10-15K","Concerns about COVID-19",1.7
+"14","10-15K","Illness or disability",21
+"15","10-15K","Not interested",15.4
+"16","10-15K","Too busy, conflicting schedule",14.2
+"17","10-15K","Transportation problems",8.5
+"18","10-15K","Didn't like candidates or issues",13.6
+"19","10-15K","Registration problems",3.8
+"20","10-15K","Inconvenient polling place",2.9
+"21","15-20K","Out of town",2.9
+"22","15-20K","Forgot to vote",1.1
+"23","15-20K","Concerns about COVID-19",3
+"24","15-20K","Illness or disability",13.7
+"25","15-20K","Not interested",25.5
+"26","15-20K","Too busy, conflicting schedule",4.7
+"27","15-20K","Transportation problems",1.8
+"28","15-20K","Didn't like candidates or issues",9.8
+"29","15-20K","Registration problems",4.9
+"30","15-20K","Inconvenient polling place",3.8
+"31","20-30K","Out of town",4
+"32","20-30K","Forgot to vote",1.3
+"33","20-30K","Concerns about COVID-19",5.7
+"34","20-30K","Illness or disability",18.9
+"35","20-30K","Not interested",19.8
+"36","20-30K","Too busy, conflicting schedule",12.2
+"37","20-30K","Transportation problems",4
+"38","20-30K","Didn't like candidates or issues",7.9
+"39","20-30K","Registration problems",9.8
+"40","20-30K","Inconvenient polling place",1.9
+"41","30-40K","Out of town",6.4
+"42","30-40K","Forgot to vote",4.6
+"43","30-40K","Concerns about COVID-19",6.8
+"44","30-40K","Illness or disability",16.1
+"45","30-40K","Not interested",17.3
+"46","30-40K","Too busy, conflicting schedule",12.4
+"47","30-40K","Transportation problems",1.4
+"48","30-40K","Didn't like candidates or issues",13.3
+"49","30-40K","Registration problems",2.1
+"50","30-40K","Inconvenient polling place",2.4
+"51","40-50K","Out of town",8.1
+"52","40-50K","Forgot to vote",2.8
+"53","40-50K","Concerns about COVID-19",4.7
+"54","40-50K","Illness or disability",12
+"55","40-50K","Not interested",16.9
+"56","40-50K","Too busy, conflicting schedule",13.9
+"57","40-50K","Transportation problems",1.7
+"58","40-50K","Didn't like candidates or issues",17.3
+"59","40-50K","Registration problems",7.4
+"60","40-50K","Inconvenient polling place",0.2
+"61","50-75K","Out of town",5.7
+"62","50-75K","Forgot to vote",3.4
+"63","50-75K","Concerns about COVID-19",5.2
+"64","50-75K","Illness or disability",10.9
+"65","50-75K","Not interested",18.9
+"66","50-75K","Too busy, conflicting schedule",15.5
+"67","50-75K","Transportation problems",1.2
+"68","50-75K","Didn't like candidates or issues",13.4
+"69","50-75K","Registration problems",4.3
+"70","50-75K","Inconvenient polling place",2.8
+"71","75-100K","Out of town",8.6
+"72","75-100K","Forgot to vote",3.8
+"73","75-100K","Concerns about COVID-19",3.4
+"74","75-100K","Illness or disability",7.2
+"75","75-100K","Not interested",19.8
+"76","75-100K","Too busy, conflicting schedule",14.4
+"77","75-100K","Transportation problems",0.8
+"78","75-100K","Didn't like candidates or issues",19.7
+"79","75-100K","Registration problems",4.9
+"80","75-100K","Inconvenient polling place",3.1
+"81","100-150K","Out of town",5.5
+"82","100-150K","Forgot to vote",3.5
+"83","100-150K","Concerns about COVID-19",2.8
+"84","100-150K","Illness or disability",8.8
+"85","100-150K","Not interested",16.9
+"86","100-150K","Too busy, conflicting schedule",14.5
+"87","100-150K","Transportation problems",0.1
+"88","100-150K","Didn't like candidates or issues",17.9
+"89","100-150K","Registration problems",6.5
+"90","100-150K","Inconvenient polling place",3.7
+"91",">150K","Out of town",8.7
+"92",">150K","Forgot to vote",5.6
+"93",">150K","Concerns about COVID-19",5.4
+"94",">150K","Illness or disability",8.4
+"95",">150K","Not interested",17.3
+"96",">150K","Too busy, conflicting schedule",18.5
+"97",">150K","Transportation problems",0.6
+"98",">150K","Didn't like candidates or issues",10.6
+"99",">150K","Registration problems",5.7
+"100",">150K","Inconvenient polling place",1.3
