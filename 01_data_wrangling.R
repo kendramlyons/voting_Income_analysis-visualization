@@ -20,11 +20,13 @@ census_voters_all_incomes <- census_voters_all_incomes[-c(1,12),]
 
 glimpse(census_voters_all_incomes)
 
+## save data to disk
 write.csv(census_voters_all_incomes, "data/census_voters_all_incomes_tidy.csv")
+
 
 # WRANGLE NONVOTER REASONS BY INCOME DATA
 
-## wrangle data for all nonvoters and save to disk
+## wrangle data for all nonvoters
 nonvoter_reasons_by_income <- nonvoter_reasons_by_income %>%
   rename("Concerns about COVID-19" = "Concerns about the coronavirus (COVID-19) pandemic",
          "Didn't like candidates or issues" = "Did not like candidates or campaign issues")
@@ -39,9 +41,10 @@ all_nonvoters <- all_nonvoters %>%
 
 glimpse(all_nonvoters)
 
+## save data to disk
 write.csv(all_nonvoters, "data/all_nonvoter_reasons_tidy.csv")
 
-## wrangle data for nonovoters by income and save to disk
+## wrangle data for nonovoters by income
 nonvoter_reasons_by_income <- nonvoter_reasons_by_income[-c(1,12),-c(2,12,14,15)]
 
 nonvoter_reasons_by_income <- nonvoter_reasons_by_income %>%
@@ -53,7 +56,9 @@ nonvoter_reasons_by_income <- nonvoter_reasons_by_income %>%
 
 glimpse(nonvoter_reasons_by_income)
 
+## save data to disk
 write.csv(nonvoter_reasons_by_income, "data/nonvoter_reasons_by_income_tidy.csv")
+
 
 # WRANGLE 538 VOTER SURVEY DATA
 
@@ -117,8 +122,9 @@ voter_survey_538 <- voter_survey_538 %>%
 glimpse(voter_survey_538)
 
 voter_survey_538_tidy <- voter_survey_538 %>%
-  select(Q3_4, Q3_5, Q5, Q26, Q30, ppage, educ, race, gender, income_cat, voter_category,
+  select(Q3_4, Q3_5, Q5, Q16, Q26, Q30, ppage, educ, race, gender, income_cat, voter_category,
          pols_dont_care, media_greed, election_results_matter, party, vote_freq, 
          income_cat_coded, voter_cat_coded, educ_coded)
 
-write.csv(voter_survey_538_tidy, "data/voter_survey_538_tidy.csv")
+## save data to disk
+write.csv(voter_survey_538_tidy, "data/voter_survey_538_tidy.csv", row.names = FALSE)
