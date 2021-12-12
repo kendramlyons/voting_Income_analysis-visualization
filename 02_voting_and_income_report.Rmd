@@ -48,9 +48,9 @@ whether they were registered to vote, whether they voted, and if they reported n
 voting, what the reason was. 
 
 Data from a FiveThirtyEight & Ipsos poll conducted in September 2020 was obtained 
-from their GitHub repository "non-voters", located at: <https://github.com/fivethirtyeight/data/tree/master/non-voters>. These data were 
-collected and used for a story published on October 26, 2020 entitled "Why Many 
-Americans Don't Vote". Specifically, questions analyzed asked people whether 
+from their GitHub repository "non-voters", located at: <https://github.com/fivethirtyeight/data/tree/master/non-voters>. 
+These data were collected and used for a story published on October 26, 2020 entitled 
+"Why Many Americans Don't Vote". Specifically, questions analyzed asked people whether 
 "traditional parties and politicians" cared about people like them, how easy they 
 considered voting in national elections to be, the importance of the results of the 
 2020 presidential election, how frequently they vote and more. Data were also 
@@ -62,7 +62,8 @@ did not match to the voter file and described themselves as voting "rarely" or
 
 This researcher’s goals in selecting this data were to explore and highlight the 
 relationships between income and election participation, but education is also taken
-into account. Income and Education can be seen as to aspects of class. This is 
+into account in the statistical analysis. Income and Education can be seen as two 
+aspects of class, both of which can influence a citizen's decision to vote. This is 
 important from a policy standpoint because understanding why voters do and don't vote 
 and what socioeconomic factors may influence their decisions can help activists, 
 canvassers, advocacy organizations, political parties and governments increase 
@@ -95,13 +96,12 @@ glimpse(nonvoters_by_income)
 
 ### Reported Voting by Income
 
-This plot displays the striking correlation between voting and income in 2020. Its purpose is 
-to demonstrate the trend of higher income correlating with greater likelihood of voting, and 
-vice versa. The subsequent plots will dive deeper into the reasons people at different income
-levels say they didn't vote in 2020 to contest characterizations of poor voters not voting due 
-to apathy or laziness. to the contrary, they are much more likely to say they Nearly 85% of 
+Figure 1 displays the striking correlation between voting and income in 2020. Nearly 85% of 
 people with annual incomes of $150,000 or more voted in 2020, while just over 41% of people 
-with annual incomes under $10,000 did. 
+with annual incomes under $10,000 did. This chart demonstrates how higher income correlates 
+with greater likelihood of voting, and vice versa. The subsequent plots will dive deeper into 
+the reasons people at different income levels say they didn't vote in 2020 to contest
+characterizations of poor voters not voting due to apathy or laziness.
 
 ```{r}
 # make palette
@@ -125,7 +125,12 @@ voters_by_income %>%
 
 ### Nonvoter Reasons, All Incomes
 
-This plot gives an overview of the general non-voting (registered) population in 2020 to explore what reasons people gave for not voting, regardless of income. This plot is meant to get people thinking about why people don't vote, and subsequent plots will dive deeper into the differences in reasons given by nonvoters with different incomes. Overall, lack of interest, not liking candidates or campaign issues, busy schedules and illness or disability are the most common reported reasons for not voting.
+Figure 2 gives an overview of the general non-voting (registered) population in 2020 to 
+explore what reasons registered citizens gave for not voting, regardless of income. This 
+plot helps answer why people of all income levels say they don't vote. Subsequent plots 
+will visualize the differences in reasons given by nonvoters with different incomes. 
+Overall, lack of interest, not liking candidates or campaign issues, busy schedules and 
+illness or disability were the most common reported reasons for not voting.
 
 ```{r}
 palette12 <- c("#001219","#005f73","#0a9396","#94d2bd","#e9d8a6","#ee9b00","#ca6702",
@@ -148,17 +153,17 @@ ggplot(aes(x = percent,
 
 ### Nonvoter Reasons by Income
 
-This plot breaks down reported reasons for not voting by income, demonstrating that 
-the lowest income voters are more likely not to vote due to barriers like disability 
-or illness, transportation issues or inconvenient polling locations. In contrast, 
-higher income voters are more likely not to vote due to busy schedules, travel or not 
-liking candidates or campaign issues. Disinterest or not liking candidates or campaign 
-issues are reasons commonly given by people at all income levels, suggesting a broad 
-crisis of faith in the U.S. political system. Notably, disability or illness and 
+Figure 3 visualizes reported reasons for not voting across income, demonstrating that 
+the lowest income voters were more likely not to vote due to barriers like disability 
+or illness, transportation issues or inconvenient polling locations. In contrast, higher 
+income voters were more likely not to vote due to busy schedules, traveling, or not 
+liking candidates or campaign issues. However, disinterest or not liking candidates or 
+campaign issues were reasons commonly given by people at *all income levels*, suggesting 
+a broad crisis of faith in the U.S. political system. Notably, disability or illness and 
 conflicting schedules were also among the top reasons for not voting overall. Both of 
 these can be ameliorated in the future by providing early and mail-in ballot access to 
 people of all income levels, and by making polling places much more accessible to low 
-income people, particularly those with disabilities and transportation issues. 
+income people, particularly those with disabilities and transportation barriers. 
 
 ```{r}
 # factor income levels
@@ -213,6 +218,11 @@ voter_survey_538$educ <- factor(voter_survey_538$educ,
 
 ### Voting Frequency and Income
 
+In Figure 4, polling data confirm the trend we saw in Figure 1. People who make less than
+$40,000 or less yearly were roughly twice as likely to to vote rarely or never as people 
+making $125,000 or more yearly. Additionally, people making more than $40,000 yearly were
+significantly more likely to always vote. 
+
 ```{r}
 vote_income_category <- voter_survey_538 %>%
   count(income_cat, voter_category) %>%
@@ -239,6 +249,10 @@ vote_income_category %>%
 *Figure 4*
 
 ### Perception of Election Result Importance and Income
+
+In Figure 5, at least 75% of respondents of all incomes agreed that the results of the 
+2020 election really mattered. However, instead agreeing that things would be pretty
+much the same, regardless became noticeably more common as income decreased. 
 
 ```{r}
 # visualize "election results matter" by income
@@ -268,6 +282,12 @@ erm_by_income %>%
 *Figure 5*
 
 ### Perception of Importance to Political Entities and Income
+
+In Figure 6, strongly agreeing with the statement "traditional parties and politicians
+don't care about people like me" was more common among lower income people, while at
+least somewhat disagreeing with it was more common among higher income people. Notably,
+a large majority of people at all income levels at least somewhat agreed with that
+statement. 
 
 ```{r}
 
@@ -301,7 +321,19 @@ pdc_by_income %>%
 
 ## Visualization
 
-Visualize relationship between income level, voting frequency and education.
+Figure 7 visualizes the relationship between income level, voting frequency and education.
+Because income and education are two aspects of class, which influences voting behavior, 
+an analysis of the relationship between voting and income should check for interactions
+with education level. People with yearly income less than $40,000 were more likely to be 
+classified as rarely or never voting, and more likely to have a high-school education or 
+less. People making $75,000 or more were more likely to be classified as always voting, as 
+well as more likely to be college-educated.
+
+Most respondants to the FiveThirtyEight poll appear to be classified as sporadic voters, 
+regardless of income level, which was also noticeable in Figure 4. FiveThirtyEight 
+categorized respondents using the voting records matched to them. According to their 
+Non-voters Codebook, sporadic voters "voted in at least two, but fewer than all-but-one 
+of the elections they were eligible in."
 
 ```{r}
 v_labels <- c("Rarely/Never", "Sporadic", "Always") 
@@ -313,24 +345,16 @@ voter_survey_538 %>%
              color = educ)) +
   geom_jitter(alpha = .5) +
   geom_smooth(method = lm) +
-  theme(text = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 18, face = "bold")) +
   labs(y = "Voter Category: Rarely/Never, Sporadic, Always",
        x = "Income: Less than $40k, $40-75k, $75-125k, $125k or more",
-       title = "Income and Voting Frequency",
+       title = "Income, Education and Voting Frequency",
        caption = "Data from FiveThirtyEight") +
   scale_color_colorblind() +
   theme_bw()
 ```
 
 *Figure 7*
-
-Most respondants to the FiveThirtyEight poll appear to be classified as sporadic voters.
-FiveThirtyEight categorized respondents using the voting records matched to them. According
-to their Non-voters Codebook, sporadic voters "voted in at least two, but fewer than 
-all-but-one of the elections they were eligible in." People with yearly income less than 
-$40,000 were more likely to be classified as rarely or never voting, and more likely to 
-have a high-school education or less. People making $75,000 or more were more likely to be 
-classified as always voting, as well as more likely to be college educated.
 
 ## Modeling
 
@@ -385,6 +409,19 @@ their students, making it very difficult for poor districts to compete.
 
 # Results
 
+In summary, this analysis confirms the following: 
+
+* The lowest income U.S. citizens are significantly less likely than the highest income citizens to vote.
+* Among all voters, the top two reasons for not voting are disinterest and dislike of candidates or campaign issues, suggesting a general lack of confidence in political institutions.
+* Lower income citizens more frequently point to barriers like disability and transportation issues that prevent them from voting, while citizens of all income levels frequently cite busy schedules.
+* Those with yearly incomes below $40,000 are more likely to never or rarely vote, while those
+making more than that are more likely to always vote.
+* A large majority of citizens at all income levels agreed that the results of the 2020 presidential election really mattered, but lower income people were more likely to say things wouldn't really change.
+* A large majority of citizens at all income levels also agreed that politicians don't care much about people like them, but lower income people were more likely to strongly agree, while higher income people were more likely to at least somewhat disagree. 
+* People with higher incomes are significantly more likely to vote, regardless of education level.
+Education level appeared to have the largest impact on voting behavior among low-income people.
+* People with a high school education or less who made under $40,000 were the least likely to vote,
+while people with a college education making $125,000 or more were the most likely to vote. 
 
 # Further References
 
