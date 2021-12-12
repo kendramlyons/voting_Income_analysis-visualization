@@ -72,12 +72,14 @@ encourage their democratic participation and personal investment in our politica
 
 For more information about the data, please refer to the following:
 
-<https://github.com/fivethirtyeight/data/tree/master/non-voters#readme>
-<https://www.census.gov/topics/public-sector/voting/about.html>
+* <https://github.com/fivethirtyeight/data/tree/master/non-voters#readme>
+* <https://www.census.gov/topics/public-sector/voting/about.html>
 
 # Visualization
 
-Read in data.
+## Census Data
+
+Read in and inspect data.
 
 ```{r}
 voters_by_income <- read_csv("data/census_voters_all_incomes_tidy.csv")
@@ -91,7 +93,7 @@ glimpse(nonvoters_by_income)
 
 ```
 
-## Reported Voting by Income
+### Reported Voting by Income
 
 This plot displays the striking correlation between voting and income in 2020. Its purpose is 
 to demonstrate the trend of higher income correlating with greater likelihood of voting, and 
@@ -110,7 +112,6 @@ voters_by_income %>%
   ggplot(aes(x=voted_percent, y=reorder(family_income, voted_percent)))+
   geom_col(aes(fill=reorder(family_income, voted_percent)), show.legend = FALSE)+
   geom_label(aes(label=voted_percent))+
-  theme_light()+
   labs(title="Reported Voting by Income", 
        subtitle="November 2020 U.S. Census Data",
        caption="Source: U.S. Census Bureau, Current Population Survey, November 2020")+
@@ -120,7 +121,9 @@ voters_by_income %>%
   theme_dark()
 ```
 
-## Nonvoter Reasons, All Incomes
+*Figure 1*
+
+### Nonvoter Reasons, All Incomes
 
 This plot gives an overview of the general non-voting (registered) population in 2020 to explore what reasons people gave for not voting, regardless of income. This plot is meant to get people thinking about why people don't vote, and subsequent plots will dive deeper into the differences in reasons given by nonvoters with different incomes. Overall, lack of interest, not liking candidates or campaign issues, busy schedules and illness or disability are the most common reported reasons for not voting.
 
@@ -141,7 +144,9 @@ ggplot(aes(x = percent,
 
 ```
 
-## Nonvoter Reasons by Income
+*Figure 2*
+
+### Nonvoter Reasons by Income
 
 This plot breaks down reported reasons for not voting by income, demonstrating that 
 the lowest income voters are more likely not to vote due to barriers like disability 
@@ -156,7 +161,7 @@ people of all income levels, and by making polling places much more accessible t
 income people, particularly those with disabilities and transportation issues. 
 
 ```{r}
-# factorize income levels
+# factor income levels
 nonvoters_by_income$income <- factor(nonvoters_by_income$income, 
                                      levels=c("<10K", "10-15K", "15-20K", "20-30K", "30-40K", 
                                               "40-50K", "50-75K", "75-100K", "100-150K", ">150K"))
@@ -173,23 +178,29 @@ nonvoters_by_income %>%
   theme_dark()
 ```
 
-# Modeling
+*Figure 3*
 
-## Data
+## FiveThirtyEight Data
 
-Read data in.
+Read in and inspect data.
 ```{r}
 voter_survey_538 <- read_csv("data/voter_survey_538_tidy.csv")
 
 glimpse(voter_survey_538)
 ```
 
-Factor income, voter category and education.
+Factor income, pols_dont_care, voter_category and education.
 
 ```{r}
 voter_survey_538$income_cat <- factor(voter_survey_538$income_cat, 
                                       levels = c("Less than $40k", "$40-75k", 
                                                  "$75-125k", "$125k or more"))
+
+
+voter_survey_538$pols_dont_care <- factor(voter_survey_538$pols_dont_care, 
+                                       levels = c("Strongly Disagree", "Somewhat Disagree", 
+                                                  "Somewhat Agree", "Strongly Agree"))
+
 
 voter_survey_538$voter_category <- factor(voter_survey_538$voter_category, 
                                       levels = c("always", "sporadic", "rarely/never"))
@@ -199,6 +210,94 @@ voter_survey_538$educ <- factor(voter_survey_538$educ,
                                       levels = c("High school or less", "Some college",
                                                  "College"))
 ```
+
+### Voting Frequency and Income
+
+```{r}
+vote_income_category <- voter_survey_538 %>%
+  count(income_cat, voter_category) %>%
+  group_by(income_cat) %>%
+  mutate(income_percent = (n/sum(n))*100)
+
+palette3 <- c("#2a9d8f", "#e9c46a", "#e76f51")
+
+vote_income_category %>%
+  filter(income_cat != "NA") %>%
+  ggplot(aes(y = income_cat,
+             x = income_percent)) +
+  geom_col(aes(fill = voter_category)) +
+  labs(title = "Voting Frequency and Income",
+       x = '', y = 'Income', caption = "Data from FiveThirtyEight") +
+  theme_linedraw() +
+  scale_fill_manual(values = palette3) +
+  theme(text = element_text(size = 16, face = "bold"),
+        legend.title = element_blank(),
+        legend.position = "top") +
+  scale_x_reverse()
+```
+
+*Figure 4*
+
+### Perception of Election Result Importance and Income
+
+```{r}
+# visualize "election results matter" by income
+erm_by_income <- voter_survey_538  %>%
+  filter(election_results_matter != "NA") %>%
+  count(election_results_matter, income_cat) %>%
+  group_by(income_cat) %>%
+  mutate(income_cat_perc = (n/sum(n))*100)
+
+palette2 <- c("#f4a261", "#2a9d8f")
+
+erm_by_income %>%
+  ggplot(aes(y = income_cat,
+             x = income_cat_perc)) +
+  geom_col(aes(fill = election_results_matter)) +
+  theme_linedraw() +
+  labs(title = "Election Result Importance and Income",
+       x = '', y = 'Income', caption = "Data from FiveThirtyEight") +
+  theme(text = element_text(size = 16, face = "bold"),
+        legend.title = element_blank(),
+        legend.position = "top") +
+  guides(fill = guide_legend(ncol = 1)) +
+  scale_x_reverse()  +
+  scale_fill_manual(values = palette2)
+```
+
+*Figure 5*
+
+### Perception of Importance to Political Entities and Income
+
+```{r}
+
+pdc_by_income <- voter_survey_538 %>%
+  filter(pols_dont_care != "NA") %>%
+  count(pols_dont_care, income_cat) %>%
+  group_by(income_cat) %>%
+  mutate(income_cat_perc = (n/sum(n))*100)
+
+palette4 <- c("#e76f51","#f4a261","#e9c46a","#2a9d8f")
+
+pdc_by_income %>%
+  ggplot(aes(y = income_cat, 
+             x = income_cat_perc)) +
+  geom_col(aes(fill = factor(pols_dont_care))) +
+  theme_linedraw() +
+  labs(title = '"Traditional parties and politicians', 
+       subtitle = 'don’t care about people like me."',
+       x = '', y = 'Income', caption = "Data from FiveThirtyEight") +
+  scale_fill_manual(values = palette4) +
+  theme(text = element_text(size = 16, face = "bold"),
+        legend.title = element_blank(),
+        legend.position = "top") +
+  guides(fill = guide_legend(ncol = 2))+
+  scale_x_reverse()
+```
+
+*Figure 6*
+
+# Modeling
 
 ## Visualization
 
@@ -214,12 +313,16 @@ voter_survey_538 %>%
              color = educ)) +
   geom_jitter(alpha = .5) +
   geom_smooth(method = lm) +
+  theme(text = element_text(size = 16, face = "bold")) +
   labs(y = "Voter Category: Rarely/Never, Sporadic, Always",
        x = "Income: Less than $40k, $40-75k, $75-125k, $125k or more",
        title = "Income and Voting Frequency",
        caption = "Data from FiveThirtyEight") +
-  scale_color_colorblind()
+  scale_color_colorblind() +
+  theme_bw()
 ```
+
+*Figure 7*
 
 Most respondants to the FiveThirtyEight poll appear to be classified as sporadic voters.
 FiveThirtyEight categorized respondents using the voting records matched to them. According
@@ -257,6 +360,8 @@ effect("income_cat*educ", income_votefreq_model) %>%
        title = "Effect of Income and Education on Voting Frequency",
        caption = "Data from FiveThirtyEight")
 ```
+
+*Figure 8*
 
 ## Interpretation
 
