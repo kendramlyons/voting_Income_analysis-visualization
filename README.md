@@ -13,3 +13,4 @@ For more information about the data, please refer to the following:
 
 * https://github.com/fivethirtyeight/data/tree/master/non-voters#readme
 * https://www.census.gov/topics/public-sector/voting/about.html
+* https://github.com/fivethirtyeight/data/blob/master/non-voters/nonvoters_codebook.pdf
