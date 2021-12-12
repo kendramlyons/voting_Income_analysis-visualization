@@ -11,10 +11,5 @@ This researcher’s goals in selecting this data were to explore and highlight t
 
 For more information about the data, please refer to the following:
 
-<<<<<<< HEAD
 * https://github.com/fivethirtyeight/data/tree/master/non-voters#readme
 * https://www.census.gov/topics/public-sector/voting/about.html
-=======
-https://github.com/fivethirtyeight/data/tree/master/non-voters#readme
-https://www.census.gov/topics/public-sector/voting/about.html
->>>>>>> 1ecdecf050dbdbdaad3be706a6a8b3737247284f
